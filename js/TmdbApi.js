@@ -13,8 +13,15 @@ class TmdbApi {
         this.#token = token;
     }
     
-    //récupère les films et en affiche 20 dans la liste
+    
     discoverMovies() {
+        
+        /*fetch('https://api.themoviedb.org/3/discover/movie', options).then(response => response.json()).then(response => {
+            response.results.forEach(results => {
+                console.log(results.title);
+                elements.firstPageMovies.innerHTML = results.title;
+            });
+        });*/
         
         elements.searchBtn.addEventListener('submit', (e) => {
             e.preventDefault();
