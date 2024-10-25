@@ -23,10 +23,7 @@ class TmdbApi {
             });
         });*/
         
-        elements.searchBtn.addEventListener('submit', (e) => {
-            e.preventDefault();
-        
-            searchMovies(elements.frontPageMovies).then(response => response.json()).then(response => {
+        searchMovies(elements.frontPageMovies).then(response => response.json()).then(response => {
                 
                 elements.frontPageMovies.innerHTML = response.results.map(results => {
                     return `<li>${results.title} + ${results.poster_path}</li>`
@@ -40,15 +37,16 @@ class TmdbApi {
     
     searchMovies() {
         elements.searchBtn.addEventListener('submit', (e) => {
-                    
             e.preventDefault();
+        
+            searchMovies(elements.searchResults).then(response => response.json()).then(response => {
                 
-            fetch(`https://www.themoviedb.org/search/movie`, options).then(response => response.json()).then(response => {
-                if(response.features.length == 0) {
-                    throw new Error("0 movies found")
-                }
-                    
-                return response.features[0].properties.label;
+                elements.searchResults.innerHTML = response.results.map(results => {
+                    return `<li>${results.title}</li>`
+                }).join('');
+            }).catch(error => {
+                elements.errorText.textContent = error.message;
+                elements.errorText.removeAttribute('hidden');
             });
         });
     };
