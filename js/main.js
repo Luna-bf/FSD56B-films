@@ -1,4 +1,5 @@
 import TmdbApi from './TmdbApi.js';
+//import {discoverMovies} from './TmdbApi.js';
 
 const options = {
     method: "GET",
